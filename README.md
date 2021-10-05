@@ -1,5 +1,7 @@
 # Webpet
 
+[![PyPi](https://github.com/momoru-kun/webpet/actions/workflows/build-package.yml/badge.svg?branch=main)](https://github.com/momoru-kun/webpet/actions/workflows/build-package.yml)
+
 Simple async web framework for python
 
 This is my pet project and it doesn't pretend to be serious
