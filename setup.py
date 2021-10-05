@@ -1,16 +1,17 @@
-from distutils.core import setup
+import setuptools
 
 
 def readme():
     with open('README.md') as f:
         return f.read()
 
-setup(
+setuptools.setup(
   name = 'webpet',
   packages = ['webpet'],
   version = '0.1',
   license='MIT',
   description = 'My simple async web framework',
+  long_description_content_type='text/markdown',
   long_description=readme(),
   author = 'Aleksandr Lenets (aka momoru_kun)',
   author_email = 'wowgonit@gmail.com',

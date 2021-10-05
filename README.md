@@ -1,14 +1,15 @@
 # Webpet
+
 Simple async web framework for python
 
 This is my pet project and it doesn't pretend to be serious
 
 ## Links
+
 - [Views](webpet/views/README.md)
 - [Routers](webpet/routers/README.md)
 - [Exceptions](webpet/exceptions/README.md)
 - [Requests](webpet/request/README.md)
-
 
 ## Simple Usage example
 
@@ -77,7 +78,8 @@ app = ASGIApplication({
 })
 ```
 
-**To run with daphne use**
+### **To run with daphne use**
+
 ```bash
 pip install daphne
 daphne <application_name>:<ASGIApplication instance>
