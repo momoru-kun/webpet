@@ -17,7 +17,9 @@ class ASGIApplication():
 
     async def __call__(self, scope, receive, send):
         if scope['type'] == 'http':
-            request = HTTPRequest(scope)
+            body = await receive()
+            request = HTTPRequest(scope, body['body'])
+
             if self.config is None:
                 if request.path != '/':
                     await send({

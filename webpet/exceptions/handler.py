@@ -1,6 +1,6 @@
-import traceback
-
 from . import exceptions
+
+import traceback
 
 
 def get_traceback(traceback):
