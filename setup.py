@@ -23,11 +23,12 @@ setuptools.setup(
       ],
   python_requies=">=3.7",
   classifiers=[
-    'Environment :: Web Environment'
+    'Environment :: Web Environment',
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
     'Topic :: Internet :: WWW/HTTP',
-    'Topic :: Internet :: WWW/HTTP :: ASGI',
+    'Topic :: Internet :: WWW/HTTP :: WSGI',
+    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     'Topic :: Software Development :: Libraries :: Application Frameworks',
     'Topic :: Software Development :: Libraries :: Python Modules',
     'License :: OSI Approved :: MIT License',
