@@ -12,6 +12,7 @@ This is my pet project and it doesn't pretend to be serious
 - [Routers](webpet/routers/README.md)
 - [Exceptions](webpet/exceptions/README.md)
 - [Requests](webpet/request/README.md)
+- [Configuration](webpet/configuration/README.md)
 
 ## Simple Usage example
 
