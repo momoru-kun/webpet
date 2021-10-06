@@ -15,34 +15,26 @@ This is my pet project and it doesn't pretend to be serious
 
 ```python
 from webpet.application import ASGIApplication
+from webpet.conf import Configuration
 from webpet.response import HTTPResponse
 from webpet.routers import HTTPRouter, URL
-from webpet.views import View, LongPoolView
+from webpet.views import View, LongPoolView, TemplateView
 
 import asyncio
 import json
 import random
+import os
 
-class Index(View):
+BASE_DIR = os.getcwd() + '/'
 
-    async def get(self):
-        await self.send(
-            HTTPResponse(
-                '<h1> Hello World </h1>',
-                content_type='text/html'
-            )
-        )
+class Index(TemplateView):
+    template_name = 'index.html'
 
 
 class Aboba(View):
 
     async def get(self):
-        await self.send(
-            HTTPResponse(
-                '<h1> Aboba </h1>',
-                content_type='text/html'
-            )
-        )
+        raise ValueError()
 
 
 class TestLong(LongPoolView):
@@ -69,13 +61,16 @@ class TestLong(LongPoolView):
 
 router = HTTPRouter(routes=[
     URL('/', Index),
-    URL('/another', Aboba),
+    URL('/aboba', Aboba),
     URL('/longpool', TestLong)
 ])
 
-app = ASGIApplication({
-    'router': router
-})
+configuration = Configuration()
+configuration.router = router
+configuration.templates_dir = BASE_DIR + 'templates/'
+
+app = ASGIApplication()
+
 ```
 
 ### **To run with daphne use**

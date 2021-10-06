@@ -14,10 +14,10 @@ class LongPoolView(BaseView):
         })
 
     async def send(self, response):
-        print(response.get_body())
+        body = await response.get_body()
         if not self.more_data:
             await self.asgi_send({
                 "type": "http.response.body",
-                "body": response.get_body(),
+                "body": body,
                 "more_body": False
             })

@@ -6,6 +6,7 @@ class HTTPRequest:
         self.method = scope['method']
         self.path = scope['path']
         self.query = parse_qs(scope['query_string'], encoding="utf-8")
+        self.query = { key.decode(): [value.decode() for value in val] for key, val in self.query.items() }
         self.headers = dict(scope['headers'])
         self.client = scope['client']
         self.server = scope['server']

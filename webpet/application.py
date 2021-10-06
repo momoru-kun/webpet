@@ -1,26 +1,27 @@
 from webpet.exceptions.handler import handler
 from webpet.request.HttpRequest import HTTPRequest
+from webpet.conf import Configuration
 
 
 class ASGIApplication():
     """Base class to asgi application
     """
 
-    def __init__(self, configuration=None):
+    def __init__(self):
         """initiate ASGI Applitaction Instance of webpet
 
         Args:
             configuration (dict, optional): dict with configuration.
-            Defaults to None.
+            Defaults to {}.
         """
-        self.config = configuration
 
     async def __call__(self, scope, receive, send):
+        config = Configuration()
         if scope['type'] == 'http':
             body = await receive()
             request = HTTPRequest(scope, body['body'])
 
-            if self.config is None:
+            if getattr(config, 'router', None) is None:
                 if request.path != '/':
                     await send({
                         "type": "http.response.start",
@@ -42,4 +43,4 @@ class ASGIApplication():
                         "body": b"<h1> Hello! </h1> <p> Async Rest framework installed successfully! <br> Please, go to docs for further configuration </p>"
                     })
             else:
-                await handler(request, send, self.config['router'])
+                await handler(request, send)

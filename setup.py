@@ -1,3 +1,4 @@
+import webpet
 import setuptools
 
 
@@ -8,7 +9,7 @@ def readme():
 setuptools.setup(
   name = 'webpet',
   packages = ['webpet'],
-  version = '0.1',
+  version = webpet.__version__,
   license='MIT',
   description = 'My simple async web framework',
   long_description_content_type='text/markdown',
@@ -18,8 +19,8 @@ setuptools.setup(
   url = 'https://github.com/momoru-kun/webpet',
   keywords = ['web', 'http', 'async', 'framework'],
   install_requires=[
-          'asyncio',
-          'urllib',
+          'jinja2==3.0.2',
+          'aiofiles==0.7.0'
       ],
   python_requies=">=3.7",
   classifiers=[
