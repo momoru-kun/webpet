@@ -1,6 +1,8 @@
 from webpet.views.base_view import BaseView
-from webpet.response import HTMLTemplateResponse
+from webpet.response import HTMLTemplateResponse, HTTPResponse
 from webpet.exceptions import TemplateNotFoundError
+
+HTTP_METHODS_AVAIL = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options', 'trace']
 
 class View(BaseView):
     async def send(self, http_response):
@@ -20,6 +22,17 @@ class View(BaseView):
             "type": "http.response.body",
             "body": body
         })
+
+    async def options(self):
+        """Handle OPTIONS method"""
+        response = HTTPResponse()
+        response.headers['Allow'] = ', '.join(self._allowed_methods())
+        response.headers['Content-Length'] = '0'
+
+        await self.send(response)
+
+    def _allowed_methods(self):
+        return [m.upper() for m in HTTP_METHODS_AVAIL if hasattr(self, m)]
 
 
 class TemplateView(View):

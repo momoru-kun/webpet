@@ -21,6 +21,5 @@ class HTMLTemplateResponse(BaseResponse):
         async with aiofiles.open(conf.templates_dir + self.template_name, mode='r') as f:
             contents = await f.read()
 
-        print(f"Query: {self.body['request'].query}")
         template = Template(contents)
         return template.render(self.body).encode('utf-8')
