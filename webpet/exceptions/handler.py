@@ -1,4 +1,5 @@
 from webpet.conf import Configuration
+from webpet.middleware.handler import MiddlewareHandler
 from . import exceptions
 
 import traceback
@@ -21,9 +22,20 @@ async def open(status_code, send):
 
 async def handler(request, send):
     conf = Configuration()
-    try:
+    view = conf.router.get_view(request.path)
+    if not hasattr(view, request.method.lower()):
+        raise exceptions.MethodNotAllowed()
+
+    middleware_handler = MiddlewareHandler(request, send)
+    await middleware_handler.after_receive(view)
+    """try:
         view = conf.router.get_view(request.path)
-        await getattr(view(request, send), request.method.lower())()
+        if not hasattr(view, request.method.lower()):
+            raise exceptions.MethodNotAllowed()
+
+        middleware_handler = MiddleWareHandler(request, send)
+        await middleware_handler.after_receive(view)
+
     except (exceptions.HTTPException) as e:
         await open(e.status_code, send)
 
@@ -55,4 +67,4 @@ async def handler(request, send):
         await send({
             "type": "http.response.body",
             "body": body.encode('utf-8')
-        })
+        })"""
